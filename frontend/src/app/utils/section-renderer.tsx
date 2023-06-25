@@ -5,6 +5,7 @@ import Pricing from "../components/Pricing";
 import Email from "../components/Email";
 
 export function sectionRenderer(section: any, index: number) {
+  console.log(section)
   switch (section.__component) {
     case "sections.hero":
       return <Hero key={index} data={section} />;
