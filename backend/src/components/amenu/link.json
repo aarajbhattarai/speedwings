@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_amenu_links",
+  "info": {
+    "displayName": "link",
+    "icon": "arrowUp"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "demodel": {
+      "type": "string"
+    },
+    "style": {
+      "type": "enumeration",
+      "enum": [
+        "None",
+        "border",
+        "blue"
+      ],
+      "default": "None"
+    }
+  }
+}

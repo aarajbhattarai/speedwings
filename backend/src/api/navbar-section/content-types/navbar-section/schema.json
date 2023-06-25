@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "navbar_sections",
+  "info": {
+    "singularName": "navbar-section",
+    "pluralName": "navbar-sections",
+    "displayName": "NavbarSection"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "label": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "links": {
+      "displayName": "link",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "amenu.link"
+    }
+  }
+}

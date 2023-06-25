@@ -20,10 +20,32 @@ export function getStrapiMedia(url: string | null) {
 
 export function formatDate(dateString: string) {
   const date = new Date(dateString);
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString('en-US', options);
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return date.toLocaleDateString("en-US", options);
 }
+
+export const getMenuItems = async () => {
+  const myHeaders = new Headers();
+  myHeaders.append(
+    "Authorization",
+    `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
+  );
+
+  const requestOptions: any = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  const menuRes = await fetch(
+    "http://localhost:1337/api/navbar-sections?populate=%2A",
+    requestOptions
+  );
+
+  const menuItems = await menuRes.json();
+  return menuItems;
+};
 
 // ADDS DELAY TO SIMULATE SLOW API REMOVE FOR PRODUCTION
 export const delay = (time: number) =>
-new Promise((resolve) => setTimeout(() => resolve(1), time));
+  new Promise((resolve) => setTimeout(() => resolve(1), time));

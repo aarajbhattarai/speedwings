@@ -15,5 +15,5 @@ module.exports = ({ env }) => ({
         delete: {},
       },
     },
-  },
+  }
 });

@@ -1,6 +1,5 @@
-
 import type { Metadata } from "next";
-import { getStrapiURL, getStrapiMedia } from "./utils/api-helpers";
+import { getStrapiURL, getStrapiMedia, getMenuItems } from "./utils/api-helpers";
 import { fetchAPI } from "./utils/fetch-api";
 import "./globals.css";
 
@@ -12,7 +11,7 @@ async function getGlobal(): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
   const path = `/global`;
   const options = { headers: { Authorization: `Bearer ${token}` } };
-  
+
   const urlParamsObject = {
     populate: [
       "metadata.shareImage",
@@ -24,10 +23,10 @@ async function getGlobal(): Promise<any> {
       "footer.menuLinks",
       "footer.legalLinks",
       "footer.socialLinks",
-      "footer.categories"
+      "footer.categories",
     ],
   };
-  
+
   const response = await fetchAPI(path, urlParamsObject, options);
   return response;
 }
@@ -61,6 +60,10 @@ export default async function RootLayout({
   const footerLogoUrl = getStrapiMedia(
     footer.footerLogo.logoImg.data.attributes.url
   );
+
+  const menuItems = await getMenuItems();
+  console.log(menuItems)
+  
 
   return (
     <html lang="en">
