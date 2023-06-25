@@ -72,6 +72,7 @@ export default async function RootLayout({
           links={navbar.links}
           logoUrl={navbarLogoUrl}
           logoText={navbar.navbarLogo.logoText}
+          menuItems={menuItems.data}
         />
 
         <main className="dark:bg-black dark:text-gray-100 min-h-screen">
