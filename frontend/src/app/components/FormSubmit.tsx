@@ -3,8 +3,7 @@ import { useState } from "react";
 import { getStrapiURL } from "../utils/api-helpers";
 
 export default function FormSubmit({
-  placeholder,
-  text,
+  placeholder,text,
 }: {
   placeholder: string;
   text: string;

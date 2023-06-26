@@ -2,22 +2,10 @@
 import Logo from "./Logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useRef } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
+import {ArrowPathIcon,Bars3Icon,ChartPieIcon,CursorArrowRaysIcon,FingerPrintIcon,SquaresPlusIcon,XMarkIcon} from "@heroicons/react/24/outline";
+import {ChevronDownIcon,PhoneIcon,PlayCircleIcon,} from "@heroicons/react/20/solid";
 
 interface NavLink {
   id: number;
@@ -26,7 +14,7 @@ interface NavLink {
   text: string;
 }
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -46,6 +34,7 @@ function NavLink({ url, text }: NavLink) {
     </li>
   );
 }
+const timeoutDuration = 120;
 
 export default function Navbar({
   links,
@@ -58,7 +47,21 @@ export default function Navbar({
   logoText: string | null;
   menuItems: any;
 }) {
+  console.log(menuItems);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const triggerRef = useRef();
+  const timeOutRef = useRef();
+
+  const handleEnter = (isOpen: any) => {
+    clearTimeout(timeOutRef.current);
+    !isOpen && triggerRef.current?.click();
+  };
+
+  const handleLeave = (isOpen: any) => {
+    timeOutRef.current = setTimeout(() => {
+      isOpen && triggerRef.current?.click();
+    }, timeoutDuration);
+  };
 
   const products = [
     {
@@ -119,80 +122,15 @@ export default function Navbar({
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <div className="items-center flex-shrink-0 hidden lg:flex">
+          {/* <div className="items-center flex-shrink-0 hidden lg:flex">
             <ul className="items-stretch hidden space-x-3 lg:flex">
               {links.map((item: NavLink) => (
                 <NavLink key={item.id} {...item} />
               ))}
             </ul>
-          </div>
+          </div> */}
           <Popover.Group className="hidden lg:flex lg:gap-x-12">
-            <Popover className="relative">
-              <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-                Product
-                <ChevronDownIcon
-                  className="h-5 w-5 flex-none text-gray-400"
-                  aria-hidden="true"
-                />
-              </Popover.Button>
-
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-200"
-                enterFrom="opacity-0 translate-y-1"
-                enterTo="opacity-100 translate-y-0"
-                leave="transition ease-in duration-150"
-                leaveFrom="opacity-100 translate-y-0"
-                leaveTo="opacity-0 translate-y-1"
-              >
-                <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
-                  <div className="p-4">
-                    {products.map((item) => (
-                      <div
-                        key={item.name}
-                        className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
-                      >
-                        <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                          <item.icon
-                            className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
-                            aria-hidden="true"
-                          />
-                        </div>
-                        <div className="flex-auto">
-                          <a
-                            href={item.href}
-                            className="block font-semibold text-gray-900"
-                          >
-                            {item.name}
-                            <span className="absolute inset-0" />
-                          </a>
-                          <p className="mt-1 text-gray-600">
-                            {item.description}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                    {/* {callsToAction.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
-                      >
-                        <item.icon
-                          className="h-5 w-5 flex-none text-gray-400"
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </a>
-                    ))} */}
-                  </div>
-                </Popover.Panel>
-              </Transition>
-            </Popover>
-
-            {menuItems.map((label: any) => {
+            {/* {menuItems.map((label: any) => {
               if (label.attributes.links.length === 0) {
                 return (
                   <a
@@ -204,25 +142,86 @@ export default function Navbar({
                   </a>
                 );
               } else return null;
-            })}
-            {/* <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Features
-            </a>
-            <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Marketplace
-            </a>
-            <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Company
-            </a> */}
+            })} */}
+
+            {/* {menuItems.map((item:any))} */}
+            <Popover className="relative">
+              {({ open }) => (
+                <div
+                  onMouseEnter={() => handleEnter(open)}
+                  onMouseLeave={() => handleLeave(open)}
+                >
+
+                  <Popover.Button
+                    className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
+                    ref={triggerRef}
+                  >
+                    Product
+                    
+                    <ChevronDownIcon
+                      className="h-5 w-5 flex-none text-gray-400"
+                      aria-hidden="true"
+                    />
+                  </Popover.Button>
+
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-200"
+                    enterFrom="opacity-0 translate-y-1"
+                    enterTo="opacity-100 translate-y-0"
+                    leave="transition ease-in duration-150"
+                    leaveFrom="opacity-100 translate-y-0"
+                    leaveTo="opacity-0 translate-y-1"
+                  >
+                    <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+                      <div className="p-4">
+                        {products.map((item) => (
+                          <div
+                            key={item.name}
+                            className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                          >
+                            <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                              <item.icon
+                                className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                                aria-hidden="true"
+                              />
+                            </div>
+                            <div className="flex-auto">
+                              <a
+                                href={item.href}
+                                className="block font-semibold text-gray-900"
+                              >
+                                {item.name}
+                                <span className="absolute inset-0" />
+                              </a>
+                              <p className="mt-1 text-gray-600">
+                                {item.description}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+                      </div>
+                    </Popover.Panel>
+                  </Transition>
+                </div>
+              )}
+            </Popover>
+
+            {/* {menuItems.map((label: any) => {
+              if (label.attributes.links.length === 0) {
+                return (
+                  <a
+                    key={label.id}
+                    href="#"
+                    className="text-sm font-semibold leading-6 text-gray-900"
+                  >
+                    {label.attributes.label})
+                  </a>
+                );
+              } else return null;
+            })} */}
           </Popover.Group>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
@@ -244,11 +243,11 @@ export default function Navbar({
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt=""
-                />
+                <div className="h-8 w-auto" >
+                    <Logo src={logoUrl} >
+                    {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
+                  </Logo>
+                </div>
               </a>
               <button
                 type="button"
@@ -322,36 +321,39 @@ export default function Navbar({
           </Dialog.Panel>
         </Dialog>
       </header>
-      <div className="container flex justify-between h-16 mx-auto px-0 sm:px-6">
-        <Logo src={logoUrl}>
-          {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
-        </Logo>
 
-        <div className="items-center flex-shrink-0 hidden lg:flex">
-          <ul className="items-stretch hidden space-x-3 lg:flex">
-            {links.map((item: NavLink) => (
-              <NavLink key={item.id} {...item} />
-            ))}
-          </ul>
-        </div>
-
-        <button className="p-4 lg:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-6 h-6 dark:text-gray-100"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-        </button>
-      </div>
     </div>
   );
 }
+
+
+      // <div className="container flex justify-between h-16 mx-auto px-0 sm:px-6">
+      //   <Logo src={logoUrl}>
+      //     {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
+      //   </Logo>
+
+      //   <div className="items-center flex-shrink-0 hidden lg:flex">
+      //     <ul className="items-stretch hidden space-x-3 lg:flex">
+      //       {/* {links.map((item: NavLink) => (
+      //         <NavLink key={item.id} {...item} />
+      //       ))} */}
+      //       </ul>
+      //       </div>
+    
+      //       <button className="p-4 lg:hidden">
+      //         <svg
+      //           xmlns="http://www.w3.org/2000/svg"
+      //           fill="none"
+      //           viewBox="0 0 24 24"
+      //           stroke="currentColor"
+      //           className="w-6 h-6 dark:text-gray-100"
+      //         >
+      //           <path
+      //             strokeLinecap="round"
+      //             strokeLinejoin="round"
+      //             strokeWidth="2"
+      //             d="M4 6h16M4 12h16M4 18h16"
+      //           ></path>
+      //         </svg>
+      //       </button>
+      //     </div>

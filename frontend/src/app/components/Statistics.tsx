@@ -1,10 +1,10 @@
 interface Stats{
-id: string;
-title:string;
-value: number;
+id: number;
+name:string;
+value: string;
 };
 
-const stats = [
+const stats: Stats[] = [
     { id: 1, name: 'Creators on the platform', value: '8,000+' },
     { id: 2, name: 'Flat platform fee', value: '3%' },
     { id: 3, name: 'Uptime guarantee', value: '99.9%' },
@@ -13,7 +13,7 @@ const stats = [
 
 
   
-  export default function Example(): JSX.Element {
+  export default function Statistics(): JSX.Element {
     return (
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -37,6 +37,6 @@ const stats = [
           </div>
         </div>
       </div>
-    )
-  };
+    );
+  }
   

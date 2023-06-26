@@ -62,7 +62,7 @@ export default async function RootLayout({
   );
 
   const menuItems = await getMenuItems();
-  console.log(menuItems)
+  // console.log(menuItems)
   
 
   return (
