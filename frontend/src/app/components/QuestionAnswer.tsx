@@ -1,3 +1,4 @@
+"use client"
 import { Disclosure } from '@headlessui/react';
 import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline';
 
@@ -15,7 +16,7 @@ const faqs:Faqs[] = [
   // More questions...
 ];
 
-export default function QuestionAnswer() {
+export default function QuestionAnswer({data}:any) {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">

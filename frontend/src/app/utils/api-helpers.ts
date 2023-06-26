@@ -38,7 +38,7 @@ export const getMenuItems = async () => {
   };
 
   const menuRes = await fetch(
-    "http://localhost:1337/api/navbar-sections?populate=%2A",
+    `${getStrapiURL("/api/navbar-sections?populate=%2A")}`,
     requestOptions
   );
 

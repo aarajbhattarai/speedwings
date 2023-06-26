@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_sections_question_answers",
+  "info": {
+    "displayName": "questionAnswer"
+  },
+  "options": {},
+  "attributes": {
+    "question": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "string"
+    }
+  }
+}

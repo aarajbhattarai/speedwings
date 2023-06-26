@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-06-26T08:50:47.007Z"
+    "x-generation-date": "2023-06-26T21:45:56.807Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6985,22 +6985,19 @@
             "type": "number"
           },
           "links": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "number"
-                },
-                "url": {
-                  "type": "string"
-                },
-                "newTab": {
-                  "type": "boolean"
-                },
-                "text": {
-                  "type": "string"
-                }
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "url": {
+                "type": "string"
+              },
+              "newTab": {
+                "type": "boolean"
+              },
+              "text": {
+                "type": "string"
               }
             }
           },
@@ -9428,6 +9425,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/SectionsHeadingComponent"
+                },
+                {
+                  "$ref": "#/components/schemas/SectionsFaqComponent"
                 }
               ]
             }
@@ -9500,6 +9500,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/SectionsHeadingComponent"
+                    },
+                    {
+                      "$ref": "#/components/schemas/SectionsFaqComponent"
                     }
                   ]
                 }
@@ -9682,6 +9685,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/SectionsHeadingComponent"
+                },
+                {
+                  "$ref": "#/components/schemas/SectionsFaqComponent"
                 }
               ]
             }
@@ -11672,6 +11678,37 @@
           },
           "description": {
             "type": "string"
+          }
+        }
+      },
+      "ElementsFaqComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "question": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          }
+        }
+      },
+      "SectionsFaqComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "__component": {
+            "type": "string"
+          },
+          "faqs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ElementsFaqComponent"
+            }
           }
         }
       },

@@ -10,7 +10,7 @@
   "attributes": {
     "links": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "links.link"
     },
     "button": {

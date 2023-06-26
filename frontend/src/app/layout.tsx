@@ -17,7 +17,6 @@ async function getGlobal(): Promise<any> {
       "metadata.shareImage",
       "favicon",
       "notificationBanner.link",
-      "navbar.links",
       "navbar.navbarLogo.logoImg",
       "footer.footerLogo.logoImg",
       "footer.menuLinks",
@@ -62,14 +61,12 @@ export default async function RootLayout({
   );
 
   const menuItems = await getMenuItems();
-  // console.log(menuItems)
   
 
   return (
     <html lang="en">
       <body>
         <Navbar
-          links={navbar.links}
           logoUrl={navbarLogoUrl}
           logoText={navbar.navbarLogo.logoText}
           menuItems={menuItems.data}

@@ -14,7 +14,7 @@ async function getPageBySlug(slug: string) {
 export default async function RootRoute() {
   const page = await getPageBySlug("home");
   const contentSections = page.data[0].attributes.contentSections;
-
+  console.log(contentSections)
   return contentSections.map((section: any, index: number) =>
     sectionRenderer(section, index)
   );
