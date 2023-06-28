@@ -6,6 +6,7 @@ import "./globals.css";
 import Banner from "./components/Banner";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Contact from "./components/Contact";
 
 async function getGlobal(): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -64,7 +65,7 @@ export default async function RootLayout({
   
 
   return (
-    <html lang="en">
+    <html lang="en" >
       <body>
         <Navbar
           logoUrl={navbarLogoUrl}
@@ -77,6 +78,7 @@ export default async function RootLayout({
         </main>
 
         <Banner data={notificationBanner} />
+        <Contact />
 
         <Footer
           logoUrl={footerLogoUrl}

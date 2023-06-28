@@ -8,16 +8,10 @@
   },
   "options": {},
   "attributes": {
-    "title": {
-      "type": "string"
-    },
     "buttons": {
       "type": "component",
       "repeatable": true,
       "component": "links.button-link"
-    },
-    "description": {
-      "type": "text"
     }
   }
 }

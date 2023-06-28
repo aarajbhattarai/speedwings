@@ -4,6 +4,7 @@ import Testimonials from "../components/Testimonials";
 import Pricing from "../components/Pricing";
 import Email from "../components/Email";
 import QuestionAnswer from "../components/QuestionAnswer";
+import BottomAction from "../components/BottomAction";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
@@ -17,6 +18,8 @@ export function sectionRenderer(section: any, index: number) {
       return <Pricing key={index} data={section} />;
     case "sections.lead-form":
       return <Email key={index} data={section} />;
+    case "sections.bottom-actions":
+      return <BottomAction key={index} data={section}/>;
     case "sections.faq":
       return <QuestionAnswer key={index} data={section}/>
     default:

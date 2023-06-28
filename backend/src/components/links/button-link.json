@@ -15,15 +15,21 @@
       "type": "boolean",
       "default": false
     },
-    "text": {
-      "type": "string"
-    },
     "type": {
       "type": "enumeration",
       "enum": [
         "primary",
         "secondary"
       ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "string"
     }
   }
 }

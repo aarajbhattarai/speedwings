@@ -50,7 +50,7 @@
         "sections.lead-form",
         "sections.features",
         "sections.heading",
-        "sections.faq"
+        "sections.faqs"
       ],
       "pluginOptions": {
         "i18n": {

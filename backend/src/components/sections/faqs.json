@@ -1,12 +1,11 @@
 {
   "collectionName": "components_sections_faqs",
   "info": {
-    "displayName": "faq",
-    "description": ""
+    "displayName": "Faqs"
   },
   "options": {},
   "attributes": {
-    "faqs": {
+    "faq": {
       "type": "component",
       "repeatable": true,
       "component": "elements.faq"

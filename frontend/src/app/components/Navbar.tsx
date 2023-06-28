@@ -98,7 +98,6 @@ export default function Navbar({
           {menuItems.map((menu: any) => {
             if (menu.attributes.links.length > 0) {
               return (
-                <>
                   <Popover.Group
                     className="hidden lg:flex lg:gap-x-12 mr-14"
                     key={menu.id}
@@ -155,11 +154,9 @@ export default function Navbar({
                       )}
                     </Popover>
                   </Popover.Group>
-                </>
               );
             } else {
               return (
-                <>
                   <Popover.Group
                     className="hidden lg:flex lg:gap-x-12 mr-14"
                     key={menu.id}
@@ -173,7 +170,6 @@ export default function Navbar({
                       </Popover.Button>
                     </Popover>
                   </Popover.Group>
-                </>
               );
             }
           })}
@@ -221,8 +217,7 @@ export default function Navbar({
                   {menuItems.map((menu: any) => {
                     if (menu.attributes.links.length > 0) {
                       return (
-                        <>
-                          <Disclosure as="div" className="-mx-3">
+                          <Disclosure as="div" className="-mx-3" key={menu.id}>
                             {({ open }) => (
                               <>
                                 <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
@@ -250,19 +245,16 @@ export default function Navbar({
                               </>
                             )}
                           </Disclosure>
-                        </>
                       );
                     } else {
                       return (
-                        <>
-                                              <a
-                        key={menu.attributes.label}
+                      <a
+                        key={menu.id}
                         href="#"
                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       >
                         {menu.attributes.label}
                       </a>
-                        </>
                       );
                     }
                   })}
